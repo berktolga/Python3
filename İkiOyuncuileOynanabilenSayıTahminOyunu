@@ -1,0 +1,102 @@
+"""
+
+Bu oyunda önce kullanıcılara oyunun kaç puanda bitmesini istedikleri soruluyor.
+Kullanıcılar puanı girdikten sonra sırasıyla birinci ve ikinci kullanıcıdan sayı tahmin etmeleri isteniyor.
+Eğer her iki kullanıcı da tahmin edemezse tahmin hakları eksiliyor ve tekrar soruluyor.
+Eğer kullanıcılardan biri sayıyı bilirse onun puanı 1 artıyor ve en başta girdikleri puana hangi kullanıcı ulaşırsa
+oyunu o kazanmış oluyor.
+
+"""
+
+import time
+import random
+print("""****************************
+
+Sayı Tahmin Oyununa Hoşgeldiniz
+
+1 ile 60 arasında(1 ve 60 dahil) rastgele tahmin edin.
+****************************""")
+tahmin_hakkı1 = 5
+tahmin_hakkı2 = 5
+rastgele_sayı = random.randint(1,60)
+birincioyuncu_puanı = 0
+ikincioyuncu_puanı = 0
+
+oyun_skoru = int(input("Oyun kaç puanda bitsin?:"))
+
+while True:
+
+    tahmin1 =  int(input("Birinci Oyuncunun Tahmini:"))
+
+    tahmin2= int(input("İkinci Oyuncunun Tahmini:"))
+
+
+    if (tahmin1 == rastgele_sayı ):
+        print("Sayı Sorgulanıyor....")
+        time.sleep(1)
+        print("Tebrikler!Birinci oyuncu sayıyı bildi.")
+        print("Sayı",rastgele_sayı)
+        birincioyuncu_puanı +=1
+        print("Birinci oyuncu puanı:",birincioyuncu_puanı)
+        print("İkinci oyuncu puanı:", ikincioyuncu_puanı)
+        tahmin_hakkı1 = 5
+        tahmin_hakkı2 = 5
+    elif ( tahmin2 ==rastgele_sayı ):
+        print("Sayı Sorgulanıyor....")
+        time.sleep(1)
+        print("Tebrikler!İkinci oyuncu sayıyı bildi.")
+        print("Sayı",rastgele_sayı)
+        ikincioyuncu_puanı +=1
+        print("İkinci oyuncu puanı:", ikincioyuncu_puanı)
+        print("Birinci oyuncu puanı:", birincioyuncu_puanı)
+        tahmin_hakkı1 = 5
+        tahmin_hakkı2 = 5
+    elif(tahmin1 < rastgele_sayı and tahmin2 < rastgele_sayı):
+        print("Sayı Sorgulanıyor....")
+        time.sleep(1)
+        tahmin_hakkı1 -= 1
+        tahmin_hakkı2 -= 1
+        print("Birinci oyuncu lütfen daha yüksek bir sayı söyleyin.")
+        print("İkinci oyuncu lütfen daha yüksek bir sayı söyleyin.")
+        print("Tahmin Hakkı:",tahmin_hakkı1)
+        print("Tahmin Hakkı:", tahmin_hakkı2)
+    elif ( tahmin1 < rastgele_sayı and tahmin2 > rastgele_sayı):
+        print("Sayı Sorgulanıyor....")
+        time.sleep(1)
+        tahmin_hakkı1 -= 1
+        tahmin_hakkı2 -= 1
+        print("Birinci oyuncu lütfen daha yüksek bir sayı söyleyin.")
+        print("İkinci oyuncu lütfen daha küçük bir sayı söyleyin.")
+        print("Tahmin Hakkı:", tahmin_hakkı1)
+        print("Tahmin Hakkı:", tahmin_hakkı2)
+    elif (tahmin1 > rastgele_sayı and tahmin2 < rastgele_sayı):
+        print("Sayı Sorgulanıyor....")
+        time.sleep(1)
+        tahmin_hakkı1 -= 1
+        tahmin_hakkı2 -= 1
+        print("Birinci oyuncu lütfen daha küçük bir sayı söyleyin.")
+        print("İkinci oyuncu lütfen daha yüksek bir sayı söyleyin.")
+        print("Tahmin Hakkı:", tahmin_hakkı1)
+        print("Tahmin Hakkı:", tahmin_hakkı2)
+    elif ( tahmin1 > rastgele_sayı and tahmin2 > rastgele_sayı):
+        print("Sayı Sorgulanıyor....")
+        time.sleep(1)
+        tahmin_hakkı1 -= 1
+        tahmin_hakkı2 -= 1
+        print("Birinci oyuncu lütfen daha küçük bir sayı söyleyin.")
+        print("İkinci oyuncu lütfen daha küçük bir sayı söyleyin.")
+        print("Tahmin Hakkı:", tahmin_hakkı1)
+        print("Tahmin Hakkı:", tahmin_hakkı2)
+    if (tahmin_hakkı1 == 0 or tahmin_hakkı2 ==0 ):
+        print("Tahmin Hakkınız Bitti. Üzgünüz")
+        print("Sayımız:",rastgele_sayı)
+        break
+    if (birincioyuncu_puanı == oyun_skoru):
+        print("Tebrikler!Oyunu birinci oyuncu kazandı!")
+        break
+    if (ikincioyuncu_puanı == oyun_skoru):
+        print("Tebrikler!Oyunu ikinci oyuncu kazandı!")
+        break
+
+
+
